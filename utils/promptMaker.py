@@ -5,16 +5,16 @@ sys.stdout = open(sys.stdout.fileno(), mode='w', encoding='utf8', buffering=1)
 
 outputNum = 20
 
-def getIdentity(identityPath):  
+def getIdentity(identityPath):
     with open(identityPath, "r", encoding="utf-8") as f:
         identityContext = f.read()
     return {"role": "user", "content": identityContext}
-    
+
 def getPrompt():
     total_len = 0
     prompt = []
     prompt.append(getIdentity("characterConfig/Pina/identity.txt"))
-    prompt.append({"role": "system", "content": f"Below is conversation history.\n"})
+    prompt.append({"role": "system", "content": "Below is conversation history.\n"})
 
     with open("conversation.json", "r") as f:
         data = json.load(f)
@@ -35,15 +35,10 @@ def getPrompt():
     
     while total_len > 4000:
         try:
-            # print(total_len)
-            # print(len(prompt))
             prompt.pop(2)
             total_len = sum(len(d['content']) for d in prompt)
-        except:
+        except IndexError:
             print("Error: Prompt too long!")
-
-    # total_characters = sum(len(d['content']) for d in prompt)
-    # print(f"Total characters: {total_characters}")
 
     return prompt
 

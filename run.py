@@ -11,12 +11,19 @@ import threading
 import json
 import socket
 from emoji import demojize
-from config import *
-from utils.translate import *
-from utils.TTS import *
-from utils.subtitle import *
-from utils.promptMaker import *
-from utils.twitch_config import *
+from config import api_key, getPrompt, server, port, token, nickname, channel, user, detect_google, translate_google, silero_tts, generate_subtitle
+from AIVA.utils.translate.translate import translate_function
+from utils.TTS import tts_function
+from utils.subtitle import subtitle_function
+from utils.promptMaker import prompt_function
+from utils.twitch_config import twitch_function
+print(api_key)
+prompt = getPrompt("example")
+translation = translate_function("text")
+speech = tts_function("text")
+subtitles = subtitle_function("video")
+prompt = prompt_function("input")
+twitch_config = twitch_function("settings")
 
 # to help the CLI write unicode characters to the terminal
 sys.stdout = open(sys.stdout.fileno(), mode='w', encoding='utf8', buffering=1)
@@ -34,7 +41,7 @@ chat = ""
 chat_now = ""
 chat_prev = ""
 is_Speaking = False
-owner_name = "Ardha"
+owner_name = "forked from Ardha"
 blacklist = ["Nightbot", "streamelements"]
 
 # function to get the user's input audio
@@ -139,7 +146,6 @@ def yt_livechat(video_id):
                         # chat_author makes the chat look like this: "Nightbot: Hello". So the assistant can respond to the user's name
                         chat = c.author.name + ' berkata ' + chat_raw
                         print(chat)
-                        
                     time.sleep(1)
             except Exception as e:
                 print("Error receiving chat: {0}".format(e))
@@ -163,7 +169,7 @@ def twitch_livechat():
             if resp.startswith('PING'):
                     sock.send("PONG\n".encode('utf-8'))
 
-            elif not user in resp:
+            elif user not in resp:
                 resp = demojize(resp)
                 match = re.match(regex, resp)
 
@@ -223,16 +229,18 @@ def translate_text(text):
         f.truncate(0)
 
 def preparation():
-    global conversation, chat_now, chat, chat_prev
+    global conversation, chat_now, chat, chat_prev, is_Speaking
     while True:
         # If the assistant is not speaking, and the chat is not empty, and the chat is not the same as the previous chat
         # then the assistant will answer the chat
         chat_now = chat
-        if is_Speaking == False and chat_now != chat_prev:
+        if not is_Speaking:
             # Saving chat history
             conversation.append({'role': 'user', 'content': chat_now})
             chat_prev = chat_now
             openai_answer()
+        else:
+            is_Speaking = True
         time.sleep(1)
 
 if __name__ == "__main__":

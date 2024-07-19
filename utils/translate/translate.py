@@ -1,7 +1,9 @@
 import requests
 import json
 import sys
-import googletrans
+from googletrans import Translator, LANGUAGES
+
+from AIVA.utils.classextensions.DetectExtension.DetectErrorExt import DetectError
 
 sys.stdout = open(sys.stdout.fileno(), mode='w', encoding='utf8', buffering=1)
 
@@ -36,20 +38,28 @@ def translate_deeplx(text, source, target):
 
 def translate_google(text, source, target):
     try:
-        translator = googletrans.Translator()
+        translator = Translator()
         result = translator.translate(text, src=source, dest=target)
         return result.text
-    except:
-        print("Error translate")
+    except ValueError as e:
+        print(f"ValueError: {e}")
+        return
+    except Exception as e:
+        print(f"An error occurred: {e}")
         return
     
 def detect_google(text):
     try:
-        translator = googletrans.Translator()
+        translator = Translator()
         result = translator.detect(text)
+        if result.lang not in LANGUAGES:
+            raise DetectError(f"Detected language '{result.lang}' is not a valid language code.")
         return result.lang.upper()
-    except:
-        print("Error detect")
+    except DetectError as de:
+        print(f"Detected error: {de.message}")
+        return
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
         return
 
 if __name__ == "__main__":

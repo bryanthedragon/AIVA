@@ -2,8 +2,7 @@ import os
 import torch
 import requests
 import urllib.parse
-from utils.katakana import *
-
+import utils.katakana
 # https://github.com/snakers4/silero-models#text-to-speech
 def silero_tts(tts, language, model, speaker):
     device = torch.device('cpu')
@@ -12,24 +11,25 @@ def silero_tts(tts, language, model, speaker):
 
     if not os.path.isfile(local_file):
         torch.hub.download_url_to_file(f'https://models.silero.ai/models/tts/{language}/{model}.pt',
-                                    local_file)  
+                                    local_file)
 
     model = torch.package.PackageImporter(local_file).load_pickle("tts_models", "model")
     model.to(device)
 
-    example_text = "i'm fine thank you and you?"
+    # the person who make the fork is asking the original person you can use # as comments so when you dont really need a set variable like this example_text variable you can comment it out
+
+    # example_text = "i'm fine thank you and you?"
     sample_rate = 48000
 
-    audio_paths = model.save_wav(text=tts,
-                                speaker=speaker,
-                                sample_rate=sample_rate)
-    
+    # the person who make the fork is asking the original person if your using audio_paths variable you have to use it to access the model.save_wav() function and the sample_rate
+
+    audio_paths = model.save_wav(text=tts,speaker=speaker,sample_rate=sample_rate)
+
 def voicevox_tts(tts):
     # You need to run VoicevoxEngine.exe first before running this script
-    
     voicevox_url = 'http://localhost:50021'
     # Convert the text to katakana. Example: ORANGE -> オレンジ, so the voice will sound more natural
-    katakana_text = katakana_converter(tts)
+    katakana_text = utils.katakana.katakana_converter(tts)
     # You can change the voice to your liking. You can find the list of voices on speaker.json
     # or check the website https://voicevox.hiroshiba.jp
     params_encoded = urllib.parse.urlencode({'text': katakana_text, 'speaker': 46})
