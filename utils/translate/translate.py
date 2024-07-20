@@ -1,8 +1,8 @@
-import requests
+
 import json
 import sys
+import requests
 from googletrans import Translator, LANGUAGES
-
 from AIVA.utils.classextensions.DetectExtension.DetectErrorExt import DetectError
 
 sys.stdout = open(sys.stdout.fileno(), mode='w', encoding='utf8', buffering=1)
@@ -47,7 +47,7 @@ def translate_google(text, source, target):
     except Exception as e:
         print(f"An error occurred: {e}")
         return
-    
+
 def detect_google(text):
     try:
         translator = Translator()

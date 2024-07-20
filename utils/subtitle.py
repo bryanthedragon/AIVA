@@ -1,4 +1,4 @@
-import Writerror
+from classextensions.WriteExtension.WriteErrorExt import Writerror
 class Subtitles:
     @staticmethod
     def generate_subtitle(chat_now, result_id):
@@ -23,5 +23,5 @@ class Subtitles:
                         outfile.write(" ".join(line) + "\n")
             except IOError:
                 raise Writerror("Error writing to chat.txt")
-        generate_outputext
+        generate_outputext()
         generate_chattext()

@@ -1,9 +1,9 @@
-import MeCab
-import pandas as pd
-import alkana
+
 import re
 import sys
-
+import MeCab
+import alkana
+import pandas as pd
 sys.stdout = open(sys.stdout.fileno(), mode='w', encoding='utf8', buffering=1)
 
 alphaReg = re.compile(r'^[a-zA-Z]+$')

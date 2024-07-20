@@ -32,7 +32,7 @@ def getPrompt():
     prompt.append(history[-1])
 
     total_len = sum(len(d['content']) for d in prompt)
-    
+
     while total_len > 4000:
         try:
             prompt.pop(2)

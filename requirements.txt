@@ -10,3 +10,5 @@ pytchat
 requests
 torch
 unidic
+pylint
+config

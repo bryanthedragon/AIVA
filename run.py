@@ -12,11 +12,11 @@ import json
 import socket
 from emoji import demojize
 from config import api_key, getPrompt, server, port, token, nickname, channel, user, detect_google, translate_google, silero_tts, generate_subtitle
-from AIVA.utils.translate.translate import translate_function
-from utils.TTS import tts_function
-from utils.subtitle import subtitle_function
-from utils.promptMaker import prompt_function
-from utils.twitch_config import twitch_function
+from .utils.translate.translate import translate_function
+from .utils.TTS import tts_function
+from .utils.subtitle import subtitle_function
+from .utils.promptMaker import prompt_function
+from .utils.twitch_config import twitch_function
 print(api_key)
 prompt = getPrompt("example")
 translation = translate_function("text")
