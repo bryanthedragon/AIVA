@@ -1,7 +1,5 @@
 # Support
 
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/R6R7AH1FA)
-
 ## Update
 
 v3.5 Now it also supports for Twitch Streamer

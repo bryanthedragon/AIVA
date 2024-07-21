@@ -254,7 +254,6 @@ if __name__ == "__main__":
             while True:
                 if keyboard.is_pressed('RIGHT_SHIFT'):
                     record_audio()
-            
         elif mode == "2":
             live_id = input("Livestream ID: ")
             # Threading is used to capture livechat and answer the chat at the same time
