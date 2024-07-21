@@ -1,7 +1,7 @@
 # forked from ardha's ai waifu Vtuber & assistant 
 you can support him at his github and his kofi
 
-www.github.com/ardha/AI-Waifu-Vtuber
+https://github.com/ardha27/AI-Waifu-Vtuber
 
 
 # Support
