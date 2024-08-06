@@ -1,6 +1,6 @@
 alkana
 emoji
-googletrans==4.0.0rc1
+googletrans
 keyboard
 mecab-python3
 openai
@@ -10,3 +10,5 @@ pytchat
 requests
 torch
 unidic
+pylint
+config
