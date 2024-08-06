@@ -1,8 +1,12 @@
 # forked from ardha27's ai waifu Vtuber & assistant
 
-you can support him at his github and his kofi
+## changelogs
 
-https://github.com/ardha27/AI-Waifu-Vtuber
+refer to [changelogs](/AIVA/MDs/Update.md)
+
+## installation
+
+refer to the [install instructions](./MDs/Install.md)
 
 ## AI Waifu Vtuber & Assistant
 
@@ -29,4 +33,6 @@ This project is inspired by shioridotdev and utilizes various technologies such 
 
 ## Credits
 
-This project is inspired by the work of shioridotdev. Special thanks to the creators of the technologies used in this project including VoiceVox Engine, DeepL, Whisper OpenAI, and VtubeStudio.
+credits to the team who make the actual repository
+
+Special thanks to the creators of the technologies used in this project including VoiceVox Engine, DeepL, Whisper OpenAI, and VtubeStudio.
